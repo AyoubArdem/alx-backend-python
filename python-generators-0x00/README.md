@@ -12,11 +12,11 @@ It integrates (Python + SQL) to handle user data dynamically, demonstrating how 
 
 By completing this project, I learned to:
 
- ✅ Create and use Python generators with the yield keyword.
- ✅ Process large datasets iteratively without loading everything into memory.
- ✅ Implement batch processing and lazy loading for paginated data.
- ✅ Calculate aggregations (like averages) efficiently using generators.
- ✅ Integrate Python with MySQL using mysql.connector.
+ -✅ Create and use Python generators with the yield keyword.
+ -✅ Process large datasets iteratively without loading everything into memory.
+ -✅ Implement batch processing and lazy loading for paginated data.
+ -✅ Calculate aggregations (like averages) efficiently using generators.
+ -✅ Integrate Python with MySQL using mysql.connector.
 
 
 
@@ -36,8 +36,8 @@ By completing this project, I learned to:
 ### 1. Clone the repository
 
 bash
-git clone https://github.com/<your-github-username>/alx-backend-python.git
-cd alx-backend-python/python-generators-0x00
+-git clone https://github.com/'<your-github-username>'/alx-backend-python.git
+-cd alx-backend-python/python-generators-0x00
 
 
 ###  2. Install dependencies
@@ -45,23 +45,23 @@ cd alx-backend-python/python-generators-0x00
 Make sure you have Python 3 and MySQL installed, then install the connector:
 
 bash
-pip install mysql-connector-python
+-pip install mysql-connector-python
 
 
 ###  3. Configure MySQL credentials
 
 Edit the connection details in each script:
 
-python
-user="root"
-password="yourpassword"
-host="localhost"
+-python
+-user="root"
+-password="yourpassword"
+-host="localhost"
 
 
 ###  4. Run the setup script
 
 bash
-python3 seed.py
+-python3 seed.py
 
 
 This will:
@@ -76,25 +76,25 @@ This will:
 ### Stream users one by one
 
 bash
-python3 0-stream_users.py
+-python3 0-stream_users.py
 
 
 ###  Process users in batches
 
 bash
-python3 1-batch_processing.py
+-python3 1-batch_processing.py
 
 
 ###  Lazy pagination
 
 bash
-python3 2-lazy_paginate.py
+-python3 2-lazy_paginate.py
 
 
 ###  Average age (memory-efficient)
 
 bash
-python3 4-stream_ages.py
+-python3 4-stream_ages.py
 
 
 
