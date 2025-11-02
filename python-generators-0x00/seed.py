@@ -5,7 +5,7 @@ import csv
 
 def connect_db():
    try:
-     return conn=mysql.connector.connect(
+     return connection=mysql.connector.connect(
          user="root",
          host="localhost",
          password="password"
@@ -14,8 +14,8 @@ def connect_db():
           print("Connection error:", e)
           return None
 
-def create_database(conn):
-    cursor=conn.cursor()
+def create_database(connection):
+    cursor=connection.cursor()
     cursor.execute("CREATE DATABASE IF NOT EXISTS ALX_prodev;")
     print("Database ALX_prodev created successfully")
     cursor.close()
@@ -33,7 +33,7 @@ def connect_to_prodev():
         print("Error:", e)
         return None
 
-def create_table(conn):
+def create_table(connection):
     cursor=conn.cursor()
     cursor.execute( """CREATE TABLE IF NOT EXISTS user_data(
                              user_id VARCHAR(36) PRIMARY KEY,
@@ -46,9 +46,9 @@ def create_table(conn):
     cursor.close()
                      
                       
-def insert_data(conn , filename):
-       cursor=conn.cursor()
-       with open(filename,'r') as file:
+def insert_data(connection , data):
+       cursor=connection.cursor()
+       with open(data,'r') as file:
             reader=csv.DictReader(file)
             for row in reader:
                         user_id = str(uuid.uuid4())
