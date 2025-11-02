@@ -1,13 +1,13 @@
 import mysql.connector
 
 def stream_users():
-   conn=mysql.connector.connect(
+   connection=mysql.connector.connect(
          user:"root",
          host:"localhost",
          password:"password",
          database="ALX_prodev"
    )
-   cursor=conn.cursor(dictionary=True)
+   cursor=connection.cursor(dictionary=True)
    for row in cursor.execute('SELECT * FROM user_data;):
                   yield row
     cursor.close()
