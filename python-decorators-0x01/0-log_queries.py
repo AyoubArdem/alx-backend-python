@@ -2,21 +2,22 @@ import sqlite3
 import functools
 
 def log_queries(func):
-  @wraps(func)
-  def wrapper(*arg,**kwargs):
-    print(f"{func.__name__} fetch all users by this query {kwargs}")
-    func(*args,**kwargs)
-    print(f"{func.__name__} gives these results: {results}")
-  return wrapper
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        print(f"{func.__name__} fetches all users with query: {args[0]}")
+        results = func(*args, **kwargs)
+        print(f"{func.__name__} gives these results: {results}")
+        return results
+    return wrapper
 
 @log_queries
 def fetch_all_users(query):
-  conn=sqlite3.connect('users.db')
-  cursor=conn.cursor()
-  cursor.execute(query)
-  results = cursor.fetchall()
-  conn.close()
-  return results
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute(query)
+    results = cursor.fetchall()
+    conn.close()
+    return results
 
-users=fetch_all_users('SELECT * FROM users;")
+users = fetch_all_users('SELECT * FROM users;')
 print(users)
