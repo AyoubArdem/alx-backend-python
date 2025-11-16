@@ -110,3 +110,10 @@ class TestIntegrationGithubOrgClient(TestCase):
     def test_public_repos_with_license(self):
         client = GithubOrgClient("google")
         self.assertEqual(client.public_repos("apache-2.0"), self.apache2_repos)
+
+
+
+(python3 -c 'print(_import("my_module").doc_)')
+(python3 -c 'print(_import("my_module").MyClass.doc_)')
+(inside and outside a class)
+(python3 -c 'print(_import("my_module").my_function.doc)' and python3 -c 'print(import("my_module").MyClass.my_function.doc_)')
