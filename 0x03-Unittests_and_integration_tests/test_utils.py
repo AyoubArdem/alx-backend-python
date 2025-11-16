@@ -65,3 +65,7 @@ with patch.object(TestClass, "a_method", return_value=42) as mock_method:
             mock_method.assert_called_once() 
 
    
+(python3 -c 'print(_import("my_module").doc_)')
+(python3 -c 'print(_import("my_module").MyClass.doc_)')
+(inside and outside a class)
+(python3 -c 'print(_import("my_module").my_function.doc)' and python3 -c 'print(import("my_module").MyClass.my_function.doc_)')
