@@ -6,11 +6,14 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from .serializers import  MessageSerializer, ConversationSerializer
 from .models import User, Message, Conversation
+from django_filters.rest_framework import DjangoFilterBackend 
 # Create your views here.
 
 class ConversationViewSet(viewsets.ModelViewSet):
     queryset = Conversation.objects.all()
     serializer_class = ConversationSerializer
+    filter_backends = [DjangoFilterBackend]
+    
 
    def get_queryset(self):
        user_id=self.request.query_params.get('user_id',None)
@@ -23,6 +26,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+    filter_backends = [DjangoFilterBackend]
 
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
