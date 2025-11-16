@@ -1,6 +1,6 @@
 python
 #!/usr/bin/env python3
-from rest_framework.routers import DefaultRouter
+from rest_framework import routers.DefaultRouter
 from .views import ConversationViewSet, MessageViewSet
 from django.urls import path, include
 
