@@ -32,7 +32,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     permission_classes = [IsAuthenticated,IsParticipantOfConversation]
     def get_queryset(self):
-        return Message.object.filter(participants__user=self.request.user)
+        return Message.objects.filter(participants__user=self.request.user)
         
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
