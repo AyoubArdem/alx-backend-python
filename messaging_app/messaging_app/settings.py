@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'rest_framework',
+    'djangorestframework-simplejwt',
     'chats',
 ]
 
@@ -130,10 +131,20 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
 
+    "DEFAULT_PAGINATION_CLASS": "rest_framwork.pagination.PageNumberPagination",
     
     "DEFAULT_AUTHENTICATION_CLASSES": [
        "rest_framework.authentication.SessionAuthentication"
     
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT={
+    "ACCESS_TOKEN_LIFETIME":timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME":timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    "AUTH_HEADERS_TYPES":('Bearer',)
 }
