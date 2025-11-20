@@ -134,7 +134,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framwork.pagination.PageNumberPagination",
     
     "DEFAULT_AUTHENTICATION_CLASSES": [
-       "rest_framework.authentication.SessionAuthentication"
+       "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BaseAuthentication",
     
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
