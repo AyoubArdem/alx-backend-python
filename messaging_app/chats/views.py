@@ -8,6 +8,7 @@ from .serializers import  MessageSerializer, ConversationSerializer
 from .models import User, Message, Conversation
 from django_filters.rest_framework import DjangoFilterBackend 
 from rest_framework.permissions import IsAuthenticated
+from .permissions import IsParticipantOfConversation
 # Create your views here.
 
 class ConversationViewSet(viewsets.ModelViewSet):
@@ -30,7 +31,9 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
     filter_backends = [DjangoFilterBackend]
     permission_classes = [IsAuthenticated,IsParticipantOfConversation]
-
+    def get_queryset(self):
+        return Message.object.filter(participants__user=self.request.user)
+        
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
         sender_ref = data.get("sender")
@@ -48,6 +51,10 @@ class MessageViewSet(viewsets.ModelViewSet):
             conv_obj = Conversation.objects.filter(conversation_id=conversation_ref).first() 
             if not conv_obj:
                 return Response({"detail": "Conversation not found."}, status=status.HTTP_400_BAD_REQUEST)
+            is_participant = Message.objects.filte(conversation_id=conv_obj,conversation_participant=request.user).exists()
+            if not is_participant :
+                return Response({"you are not participant of this conversation"},status=status.HTTP_403_FORBIDDEN)
+                
 
        
         serializer = self.get_serializer(data={
