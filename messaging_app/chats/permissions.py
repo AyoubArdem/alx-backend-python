@@ -12,6 +12,11 @@ class IsParticipantOfConversation(permissions.BasePermission):
         
       if hasatter(obj,"conversation") :
         return obj.conversation.participant_id_user_id == user_id
+
+      if request.method in ["GET","Patch","PUT","DELETE"]:
+         return True
+   return False
+        
  
 
      
