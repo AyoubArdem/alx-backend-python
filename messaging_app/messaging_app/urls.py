@@ -18,6 +18,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt.viiews import ( 
+            TokenObtainPairView,
+            TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +31,8 @@ urlpatterns = [
 
     # required by DRF for browsable API login/logout
     path('api-auth/', include('rest_framework.urls')),
+
+    path('api/login/',TokenObtainPairView.as_view(),name='access_token'),
+    path('api/refresh/',TokenRefreshView.as_view(),name='refresh_token'),
 ]
 
