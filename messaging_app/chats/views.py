@@ -9,12 +9,16 @@ from .models import User, Message, Conversation
 from django_filters.rest_framework import DjangoFilterBackend 
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsParticipantOfConversation
+from .pagination import MessagePagination
+from .filters import MessageFilter
 # Create your views here.
 
 class ConversationViewSet(viewsets.ModelViewSet):
     queryset = Conversation.objects.all()
     serializer_class = ConversationSerializer
     filter_backends = [DjangoFilterBackend]
+    filterset_class = MessageFilter
+    pagination_class = MessagePagination
     permission_classes = [IsAuthenticated,IsParticipantOfConversation]
     
 
