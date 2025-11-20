@@ -14,7 +14,7 @@ class ConversationViewSet(viewsets.ModelViewSet):
     queryset = Conversation.objects.all()
     serializer_class = ConversationSerializer
     filter_backends = [DjangoFilterBackend]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,IsParticipantOfConversation]
     
 
    def get_queryset(self):
@@ -29,7 +29,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
     filter_backends = [DjangoFilterBackend]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,IsParticipantOfConversation]
 
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
