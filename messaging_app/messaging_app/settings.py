@@ -131,9 +131,9 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
 
-    "DEFAULT_PAGINATION_CLASS": "rest_framwork.pagination.PageNumberPagination",
+    "DEFAULT_PAGINATION_CLASS": "chats.pagination.MessagePagination",
     "PAGE_SIZE":20,
-    
+    "DEFAULT_FILTERS_BACKENDS":["django_filters.rest_framework.DjangoFilterBackends"],
     "DEFAULT_AUTHENTICATION_CLASSES": [
        "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
