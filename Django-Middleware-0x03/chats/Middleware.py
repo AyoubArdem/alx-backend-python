@@ -1,7 +1,6 @@
 import datetime 
 import time
 from django.http import JsonResponse
-from django.utils import deltatime , timezone
 from rest_framework.response import Response
 
 class RequestLoggingMiddleware:
