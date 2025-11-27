@@ -22,3 +22,15 @@ def register_old_message(sender,instance):
                 old_content=old.content
             )
             instance.edited = True
+
+@receiver(post_delete, sender=User)
+def delete_user_related(sender, instance, **kwargs):
+    from .models import Message, Notification, MessageHistory
+
+    Message.objects.filter(sender=instance).delete()
+    Message.objects.filter(receiver=instance).delete()
+
+    Notification.objects.filter(user=instance).delete()
+
+    MessageHistory.objects.filter(message__sender=instance).delete()
+
