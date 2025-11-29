@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from .permissions import IsParticipantOfConversation
 from .pagination import MessagePagination
 from .filters import MessageFilter
+from django.views.decorators.cache import cahe_page
 # Create your views here.
 
 class ConversationViewSet(viewsets.ModelViewSet):
@@ -21,7 +22,7 @@ class ConversationViewSet(viewsets.ModelViewSet):
     pagination_class = MessagePagination
     permission_classes = [IsAuthenticated,IsParticipantOfConversation]
     
-
+   @cache_page(60,key_prefix="conversation")    
    def get_queryset(self):
        user_id=self.request.query_params.get('user_id',None)
        if user_id is not None:
