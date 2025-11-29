@@ -13,7 +13,6 @@ def conversation_thread(request, user_id):
             Prefetch("message_set", queryset=Message.objects.select_related("sender"))
         )
     )
-
     data = []
     for msg in messages:
         data.append({
