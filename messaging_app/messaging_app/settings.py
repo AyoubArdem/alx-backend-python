@@ -153,3 +153,13 @@ SIMPLE_JWT={
     "ROTATE_REFRESH_TOKENS": True,
     "AUTH_HEADERS_TYPES":('Bearer',)
 }
+
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
