@@ -10,11 +10,20 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     edited = models.BooleanField(default=False)
     read = models.BooleanField(default=False)
+    objects = models.Manager()
+    unread = UnreadMessagesManager()
     parent_message = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
 
 
     def __str__(self):
         return f"{self.sender} → {self.receiver}: {self.content[:20]}"
+
+
+class UnreadMessagesManager(models.Manager):
+    def for_user(self, user):
+        return self.get_queryset().filter(
+            receiver=user, read=False
+        ).only("id", "content", "sender_id", "timestamp")
 
 
   
