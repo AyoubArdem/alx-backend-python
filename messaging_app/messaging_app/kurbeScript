@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "start minikube..."
+minikube start --driver docker
+echo "minikube cluster started"
+echo "check cluster status"
+kubectl cluster-info
+echo "Listing current pods"
+kubectl get pods -o wide
