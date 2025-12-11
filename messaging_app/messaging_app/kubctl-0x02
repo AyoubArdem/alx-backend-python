@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "Deploying BLUE version..."
+kubectl apply -f blue_deployment.yaml
+
+echo "Deploying GREEN version..."
+kubectl apply -f green_deployment.yaml
+
+echo "Checking logs for BLUE deployment..."
+kubectl logs deployment/messaging-blue
+
+echo "Checking logs for GREEN deployment..."
+kubectl logs deployment/messaging-green
+
