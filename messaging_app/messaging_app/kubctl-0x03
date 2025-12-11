@@ -1,0 +1,10 @@
+#!/bin/bash
+kubectl apply -f blue_deployment.yaml
+kubectl rollout status deployment/messaging-blue
+repo=$(curl -s -o /dev/null -w "%{http_code}" http://<minikube-ip>:<node-port>)
+if [ "$repo" -eq 200 ]; then
+   echo "app is up"
+else
+   echo "app is down (HTTP code: $repo)"
+fi
+
