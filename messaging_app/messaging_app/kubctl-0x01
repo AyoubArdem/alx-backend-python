@@ -1,0 +1,8 @@
+echo "Scaling deployment to 3 replicas"
+kubectl scale deployment --replicas 3
+echo "Checking running pods"
+kubectl get pods
+echo "echo "Load testing using wrk..."
+wrk http://<minikube-ip>:<node-port>
+echo "Monitoring resource usage..."
+kubectl top pods
