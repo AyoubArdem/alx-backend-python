@@ -1,0 +1,33 @@
+apiVersion: app/v1
+kind: Deployment
+metadata:
+  name: messaging-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: messaging-app
+  template:
+    metadata:
+      labels:
+        app: messaging-app
+    spec:
+      containers:
+        - name: messaging-app
+          image: yourdockerhubusername/messaging-app:1.0
+          ports:
+            - containerPort: 8000
+
+
+apiVersion: v2
+kind: Service
+metadata:
+  name: messaging-service
+spec:
+  selector:
+    app: messaging-app
+  type: ClusterIP
+  ports:
+    - port: 8000
+      targetPort: 8000
+
