@@ -4,6 +4,7 @@ pipeline {
 
     environment {
         VENV = "venv"
+        ImageName = "dockerhub_username/messaging_app"
     }
 
     stages {
@@ -15,7 +16,7 @@ pipeline {
                     branch: 'main'
             }
         }
-       stages {
+       
 
         stage('run dependencies') {
             steps {
@@ -37,7 +38,25 @@ pipeline {
                 '''
             }
         }
-    }
+   
+      stage('build image'){
+          steps{
+              sh ' docker build -t  $ImageName .'
+          }
+      }
+      stage('push docker image'){
+          steps{
+              
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )])
+                sh '''
+                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    docker push $IMAGE_NAME:latest
+                    '''
+          }
       
     post {
         always {
@@ -46,4 +65,4 @@ pipeline {
     }
 }
 
-}
+
