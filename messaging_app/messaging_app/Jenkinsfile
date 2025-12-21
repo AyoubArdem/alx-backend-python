@@ -1,0 +1,49 @@
+
+pipeline {
+    agent any
+
+    environment {
+        VENV = "venv"
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git credentialsId: 'github-creds',
+                    url: 'https://github.com/AyoubArdem/alx-backend-python.git',
+                    branch: 'main'
+            }
+        }
+       stages {
+
+        stage('run dependencies') {
+            steps {
+               sh '''
+               python3 -m virtualenv 
+               virualenv $VENV
+               . $VENV/bin/Activate
+               pip install -r requirments.txt
+               '''
+            }
+        }
+         
+
+        stage('Run Tests') {
+            steps {
+                sh '''
+                . $VENV/bin/activate
+                pytest --junitxml=test-results.xml
+                '''
+            }
+        }
+    }
+      
+    post {
+        always {
+            junit 'test-results.xml'
+        }
+    }
+}
+
+}
