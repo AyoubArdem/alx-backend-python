@@ -39,3 +39,17 @@ jobs:
         DB_PASSWORD: root
       run: |
         pytest
+
+      - name: Lint with flake8
+      run: |
+        flake8 .
+
+    - name: Run Coverage
+      run: |
+        pytest --cov=. --cov-report=xml
+
+    - name: Upload Coverage Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: coverage.xml
